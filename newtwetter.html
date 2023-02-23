@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+ <head>
+ <title>Twitter Site</title>
+ <style type="text/css">
+  @font-face {
+    font-family:"Times New Roman";
+  }
+  #text {
+    font-family: "Times New Roman";
+    font-size: 40px;
+    color: white;
+  }
+  #title{
+    color: white;
+    background-color: #1DA1F2;
+    border-radius: 5px;
+    padding: 5px 10px;
+    width: 200px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+  }
+ body {
+   background-image: url('background.jpg');
+ }
+  .container {
+   width: 80%;
+   text-align: left;
+  }
+  #tweet-box {
+   width: 100%;
+   margin-top: 10px;
+   padding: 10px;
+   border: 2px solid #ccc;
+   resize: none;
+   min-height: 80px;
+   text-align: left;
+   font-size: 14px;
+   border-radius: 5px;
+  }
+  #tweet-button {
+   background-color: #1DA1F2;
+   color: #FFFFFF;
+   border-radius: 5px;
+   padding: 5px 10px;
+   width: 100px;
+   border: none;
+   cursor: pointer;
+  }
+  .tweets {
+   margin: 10px;
+   padding: 10px;
+   border: 1px solid #ccc;
+   border-radius: 5px;
+  }
+  .tweets p {
+   margin: 0;
+   padding: 0;
+  }
+ </style>
+ </head>
+ <body>
+  <div class="container">
+   <h1 id="title">Twitter Site</h1>
+   <div id="tweet-input">
+    <textarea id="tweet-box" placeholder="What's on your mind?"></textarea>
+    <br/>
+    <button id="tweet-button">Tweet</button>
+   </div>
+   <div class="tweets-container">
+   </div>
+  </div>
+  <script type="text/javascript">
+    var tweetInput = document.getElementById('tweet-box');
+    var tweetButton = document.getElementById('tweet-button');
+    var tweetsContainer = document.querySelector('.tweets-container');
+    tweetButton.addEventListener('click', function() {
+     if(tweetInput.value) {
+      var tweetElement = document.createElement('div');
+      tweetElement.classList.add('tweets');
+      tweetElement.innerHTML = `
+      <p id="text">${tweetInput.value}</p>
+      `
+      tweetsContainer.appendChild(tweetElement);
+      tweetInput.value = '';
+     }
+    });
+    var tweets = [];
+
+    // Load tweets from JSON file and display them
+    function loadTweets() {
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          tweets = JSON.parse(xhr.responseText);
+          displayTweets();
+        }
+      };
+      xhr.open("GET", "tweets.json", true);
+      xhr.send();
+    }
+
+    // Display tweets on the page
+    function displayTweets() {
+      var tweetsContainer = document.querySelector('.tweets-container');
+      tweetsContainer.innerHTML = '';
+      tweets.forEach(function(tweet) {
+        var tweetElement = document.createElement('div');
+        tweetElement.classList.add('tweets');
+        tweetElement.innerHTML = `
+          <p id="text">${tweet.text}</p>
+        `;
+        tweetsContainer.appendChild(tweetElement);
+      });
+    }
+
+    // Save a tweet to the JSON file and display it on the page
+    function saveTweet(tweet) {
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          tweets.push(tweet);
+          displayTweets();
+        }
+      };
+      xhr.open("POST", "save_tweet.php", true);
+      xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      xhr.send(JSON.stringify(tweet));
+    }
+
+    // Event listener for the "Tweet" button
+    document.getElementById("tweet-button").addEventListener("click", function() {
+      var tweetBox = document.getElementById("tweet-box");
+      var tweetText = tweetBox.value;
+      var tweet = {
+        text: tweetText
+  };
+      saveTweet(tweet);
+      tweetBox.value = '';
+});
+
+    loadTweets();
+   </script>
+  </body>
+</html>
