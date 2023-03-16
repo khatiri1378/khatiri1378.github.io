@@ -37,11 +37,11 @@
 
       def submitTweet():
         display(Element('tweet-text').element.value + " ----------> " + time, target="body")
-        text = Element('tweet-text').element.value + " ----------> " + time + "\n"
+         
         file = open("test.txt", "a")
-        file.write(text)
+        file.write(Element('tweet-text').element.value + " ----------> " + time + "\n")
         file.close()
-        text = ""
+        
 
         Element('tweet-text').element.value = ""
 
