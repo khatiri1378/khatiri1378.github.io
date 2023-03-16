@@ -21,7 +21,7 @@
 
     <py-config>
     [[fetch]]
-    files = ["test.txt"]
+    files = ["text.txt"]
   </py-config>
 
 
@@ -29,6 +29,7 @@
       file = open("test.txt", "r")
       for i in file:
         display(i)
+      file.close()
 
       from datetime import datetime
       now = datetime.now()
@@ -36,6 +37,12 @@
 
       def submitTweet():
         display(Element('tweet-text').element.value + " ----------> " + time, target="body")
+        text = display(Element('tweet-text').element.value
+        file = open("test.txt", "w")
+        file.write(text)
+        file.close()
+        text = ""
+
         Element('tweet-text').element.value = ""
 
     </py-script>
