@@ -1,0 +1,50 @@
+<html>
+
+
+
+  <head>
+    <title>My Twitter</title>
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+  </head>
+
+
+
+
+
+  <body id="body" >
+    <div class="tweet-box">
+      <textarea id="tweet-text" placeholder="توئیت خود را وارد کنید"></textarea>
+    </div>
+
+    <button py-click="submitTweet()">توئیت</button>
+
+    <py-config>
+    [[fetch]]
+    files = ["test.txt"]
+  </py-config>
+
+
+    <py-script>
+      file = open("test.txt", "r")
+      for i in file:
+        display(i)
+
+      from datetime import datetime
+      now = datetime.now()
+      time = now.strftime("%d/%m/%Y %H:%M:%S")
+
+      def submitTweet():
+        display(Element('tweet-text').element.value + " ----------> " + time, target="body")
+        Element('tweet-text').element.value = ""
+
+    </py-script>
+
+
+
+
+
+
+
+  </body>
+</html>
