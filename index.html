@@ -47,7 +47,7 @@
         url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{file_path}"
         headers = {'Authorization': f'token {api_token}'}
         response = await request(url, method="GET", headers=headers)
-        asyncio.ensure_future(main())
+        
         response_json = response.json()
 
         # Append your new information to the file
@@ -65,7 +65,7 @@
 
         # Update the file in the repository
         response = await request(url, method="PUT",body=body, headers=headers, json=payload)
-        asyncio.ensure_future(main())
+        
         if response.status_code == 200:
             print('File updated successfully!')
         else:
@@ -76,7 +76,7 @@
 
 
         Element('tweet-text').element.value = ""
-
+      asyncio.ensure_future(main())
     </py-script>
 
 
