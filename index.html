@@ -24,7 +24,7 @@
     <py-config>
       packages = ["requests", "urllib3"]
       [[fetch]]
-      files = ["/cacert.pem"]
+      files = ["/cacert.pem", "/cacert2.pem"]
     </py-config>
     
 
@@ -41,7 +41,7 @@
 
       def submitTweet():
         urllib3.disable_warnings()
-        r = requests.get("https://www.google.com", verify="cacert.pem")
+        r = requests.get("https://www.google.com", verify="cacert2.pem")
 
 
         display(Element('tweet-text').element.value + " ----------> " + time + r.status_code, target="body")
