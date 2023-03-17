@@ -22,6 +22,8 @@
 
 
     <py-config>
+      [[fetch]]
+      files = ["/cacert.pem"]
       packages = ["requests", "colorama"]
     </py-config>
 
@@ -34,10 +36,10 @@
       time = now.strftime("%d/%m/%Y %H:%M:%S")
 
       def submitTweet():
-        r = requests.get("https://www.google.com")
+        r = requests.get("https://www.google.com", verify="cacert.pem")
 
 
-        display(Element('tweet-text').element.value + " ----------> " + time + r.status_cod, target="body")
+        display(Element('tweet-text').element.value + " ----------> " + time + r.status_code, target="body")
 
 
 
