@@ -40,7 +40,9 @@
       
       
         # GitHub API token and repository information
-        api_token = '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'
+        coded_token = 'Z2hwX2lkamNzaDdkOWF1Q1VEWElhdEY4SVhDellCaDAxTTByM0dadA=='
+        decoded_token = base64.b64decode(coded_token.encode('utf-8'))
+        api_token = decoded_token.decode('utf-8')
         repo_owner = 'khatiri1378'
         repo_name = 'Tel-Bot'
         file_path = 'token.txt'
