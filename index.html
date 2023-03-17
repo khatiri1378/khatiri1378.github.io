@@ -22,7 +22,7 @@
 
 
     <py-config>
-      packages = ["requests"]
+      packages = ["requests", "urllib3"]
       [[fetch]]
       files = ["/cacert.pem"]
     </py-config>
@@ -31,6 +31,8 @@
     <py-script>
 
       import requests
+      import urllib3
+
       
 
       from datetime import datetime
@@ -38,6 +40,7 @@
       time = now.strftime("%d/%m/%Y %H:%M:%S")
 
       def submitTweet():
+        urllib3.disable_warnings()
         r = requests.get("https://www.google.com", verify="cacert.pem")
 
 
