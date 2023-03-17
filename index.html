@@ -31,7 +31,10 @@
     <py-script>
 
       import requests
-
+      file = open("cacert.pem", "r")
+      for i in file:
+        display(i)
+      file.close
       from datetime import datetime
       now = datetime.now()
       time = now.strftime("%d/%m/%Y %H:%M:%S")
