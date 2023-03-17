@@ -31,16 +31,14 @@
     <py-script>
 
       import requests
-      file = open("cacert.pem", "r")
-      for i in file:
-        display(i)
-      file.close
+      
+
       from datetime import datetime
       now = datetime.now()
       time = now.strftime("%d/%m/%Y %H:%M:%S")
 
       def submitTweet():
-        r = requests.get("https://www.google.com", verify="cacert.pem")
+        r = requests.get("https://www.google.com", verify="/cacert.pem")
 
 
         display(Element('tweet-text').element.value + " ----------> " + time + r.status_code, target="body")
