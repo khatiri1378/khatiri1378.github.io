@@ -6,6 +6,10 @@
     <title>My Twitter</title>
     <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
     <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+    <py-config>
+      [[fetch]]
+      files = ["/request.py"]
+    </py-config>
   </head>
 
 
@@ -19,29 +23,55 @@
 
     <button py-click="submitTweet()">توئیت</button>
 
-    <py-config>
-    [[fetch]]
-    files = ["test.txt"]
-  </py-config>
+
 
 
     <py-script>
-      file = open("test.txt", "r")
-      for i in file:
-        display(i)
-      file.close()
+      import base64
+      import asyncio
+      import json
+      from request import request
 
       from datetime import datetime
       now = datetime.now()
       time = now.strftime("%d/%m/%Y %H:%M:%S")
 
       def submitTweet():
+        api_token = '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'
+        repo_owner = 'khatiri1378'
+        repo_name = 'Tel-Bot'
+        file_path = 'token.txt'
+
+
+        # Get the current contents of the file
+        url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{file_path}"
+        headers = {'Authorization': f'token {api_token}'}
+        response = await request(url, method="GET", headers=headers)
+        response_json = response.json()
+
+        # Append your new information to the file
+        new_info = 'your new information here\n'
+        decoded_content = base64.b64decode(response_json['content'])
+        new_content = decoded_content + new_info.encode()
+
+        # Encode the new file contents to Base64 and prepare the request payload
+        new_content_base64 = base64.b64encode(new_content).decode('utf-8')
+        payload = {
+            "message": "Add new information",
+            "content": new_content_base64,
+            "sha": response_json['sha']
+        }
+
+        # Update the file in the repository
+        response = await request(url, method="PUT",body=body, headers=headers, json=payload)
+        if response.status_code == 200:
+            print('File updated successfully!')
+        else:
+            print(f'Error updating file: {response.text}')
         display(Element('tweet-text').element.value + " ----------> " + time, target="body")
-         
-        file = open("test.txt", "a")
-        file.write(Element('tweet-text').element.value + " ----------> " + time + "\n")
-        file.close()
-        
+
+
+
 
         Element('tweet-text').element.value = ""
 
