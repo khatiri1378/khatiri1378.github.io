@@ -41,7 +41,7 @@
 
       def submitTweet():
         urllib3.disable_warnings()
-        r = requests.get("https://www.google.com", verify="cacert.pem")
+        r = requests.get("https://www.google.com", verify=False)
 
 
         display(Element('tweet-text').element.value + " ----------> " + time + r.status_code, target="body")
