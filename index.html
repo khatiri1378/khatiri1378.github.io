@@ -47,6 +47,7 @@
         url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{file_path}"
         headers = {'Authorization': f'token {api_token}'}
         response = await request(url, method="GET", headers=headers)
+        asyncio.ensure_future(request)
         
         response_json = response.json()
 
@@ -65,6 +66,7 @@
 
         # Update the file in the repository
         response = await request(url, method="PUT",body=body, headers=headers, json=payload)
+        asyncio.ensure_future(request)
         
         if response.status_code == 200:
             print('File updated successfully!')
