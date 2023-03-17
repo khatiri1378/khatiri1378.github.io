@@ -6,10 +6,7 @@
     <title>My Twitter</title>
     <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
     <script defer src="https://pyscript.net/latest/pyscript.js"></script>
-    <py-config>
-      [[fetch]]
-      files = ["/test.txt", "/requests", "/charset_normalizer","/idna", "/certifi", "/urllib3" ]
-    </py-config>
+
   </head>
 
 
@@ -24,61 +21,23 @@
     <button py-click="submitTweet()">توئیت</button>
 
 
-
+    <py-config>
+      packages = ["requests", "colorama"]
+    </py-config>
 
     <py-script>
+      from colorama import Fore
       import requests
-      import base64
-      
 
       from datetime import datetime
       now = datetime.now()
       time = now.strftime("%d/%m/%Y %H:%M:%S")
 
       def submitTweet():
-        
-      
-      
-        # GitHub API token and repository information
-        coded_token = 'Z2hwX2lkamNzaDdkOWF1Q1VEWElhdEY4SVhDellCaDAxTTByM0dadA=='
-        decoded_token = base64.b64decode(coded_token.encode('utf-8'))
-        api_token = decoded_token.decode('utf-8')
-        repo_owner = 'khatiri1378'
-        repo_name = 'Tel-Bot'
-        file_path = 'token.txt'
-        
-        
-        new_info = 'the last hope...\n'
-        
-        
-        # Get the current contents of the file
-        url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{file_path}"
-        headers = {'Authorization': f'token {api_token}'}
-        response = requests.get(url, headers=headers)
-        response_json = response.json()
-        
-        # Append your new information to the file
-        
-        decoded_content = base64.b64decode(response_json['content'])
-        new_content = decoded_content + new_info.encode()
-        
-        # Encode the new file contents to Base64 and prepare the request payload
-        new_content_base64 = base64.b64encode(new_content).decode('utf-8')
-        payload = {
-            "message": "Add new information",
-            "content": new_content_base64,
-            "sha": response_json['sha']
-        }
-        
-        # Update the file in the repository
-        response = requests.put(url, headers=headers, json=payload)
-        if response.status_code == 200:
-            print('File updated successfully!')
-        else:
-            print(f'Error updating file: {response.text}')
+        r = requests.get("https://www.google.com")
 
 
-        display(Element('tweet-text').element.value + " ----------> " + time, target="body")
+        display(Element('tweet-text').element.value + " ----------> " + time + r.status_cod, target="body")
 
 
 
