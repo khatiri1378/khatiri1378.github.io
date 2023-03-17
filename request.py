@@ -15,4 +15,4 @@ async def request(url: str, method: str = "GET", body: Optional[str] = None,
 
                           response = await pyfetch(url, **kwargs)
                           return response
-asyncio.ensure_future(main())
+asyncio.ensure_future(request())
