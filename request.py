@@ -10,4 +10,4 @@ async def request(url: str, method: str = "GET", body: Optional[str] = None, hea
       kwargs.update(fetch_kwargs)
       response = await pyfetch(url, **kwargs)
       return response
-asyncio.ensure_future(request())
+  asyncio.ensure_future()
