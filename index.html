@@ -36,7 +36,8 @@
       now = datetime.now()
       time = now.strftime("%d/%m/%Y %H:%M:%S")
 
-      def submitTweet():
+      async def submitTweet():
+        
         api_token = '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'
         repo_owner = 'khatiri1378'
         repo_name = 'Tel-Bot'
@@ -47,7 +48,7 @@
         url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{file_path}"
         headers = {'Authorization': f'token {api_token}'}
         response = await request(url, method="GET", headers=headers)
-        asyncio.ensure_future(request)
+        
         
         response_json = response.json()
 
@@ -66,7 +67,7 @@
 
         # Update the file in the repository
         response = await request(url, method="PUT",body=body, headers=headers, json=payload)
-        asyncio.ensure_future(request)
+        
         
         if response.status_code == 200:
             print('File updated successfully!')
@@ -78,7 +79,7 @@
 
 
         Element('tweet-text').element.value = ""
-      
+      asyncio.ensure_future(submitTweet())
     </py-script>
 
 
