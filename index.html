@@ -22,14 +22,15 @@
 
 
     <py-config>
-      packages = ["requests", "urllib3", "ssl"]
+      packages = ["requests", "urllib3", "ssl", "asyncio", "json"]
       [[fetch]]
       files = ["/cacert.pem", "/cacert2.pem", "/req.py"]
     </py-config>
     
 
     <py-script>
-
+      import asyncio
+      import json
       
       from req import request
 
@@ -39,7 +40,8 @@
       now = datetime.now()
       time = now.strftime("%d/%m/%Y %H:%M:%S")
 
-      def submitTweet():
+      async def submitTweet():
+
         response = await request("https://www.google.com", method="GET")
         print(f"GET request=> status:{response.status}, json:{await response.json()}")
         
@@ -53,7 +55,7 @@
 
 
         Element('tweet-text').element.value = ""
-
+      asyncio.ensure_future(submitTweet())
     </py-script>
 
 
