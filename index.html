@@ -41,8 +41,9 @@
       time = now.strftime("%d/%m/%Y %H:%M:%S")
 
       async def submitTweet():
+        baseurl = "https://jsonplaceholder.typicode.com"
         headers = {"Content-type": "application/json"}
-        response = await request("https://www.google.com", method="GET", headers=headers)
+        response = await request(f"{baseurl}/posts/2", method="GET", headers=headers)
         print(f"GET request=> status:{response.status}, json:{await response.json()}")
         
         
