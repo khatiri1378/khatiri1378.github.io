@@ -40,8 +40,8 @@
       time = now.strftime("%d/%m/%Y %H:%M:%S")
 
       def submitTweet():
-        urllib3.disable_warnings()
-        r = requests.get("https://www.google.com", verify="cacert2.pem")
+        
+        r = requests.get("http://www.github.com")
 
 
         display(Element('tweet-text').element.value + " ----------> " + time + r.status_code, target="body")
