@@ -44,7 +44,7 @@
         baseurl = "https://jsonplaceholder.typicode.com"
         headers = {"Content-type": "application/json"}
         response = await request(f"{baseurl}/posts/2", method="GET", headers=headers)
-        print(f"GET request=> status:{response.status}, json:{await response.json()}")
+        display(f"GET request=> status:{response.status}, json:{await response.json()}")
         
         
         
