@@ -30,9 +30,8 @@
 
     <py-script>
 
-      import requests
-      import urllib3
-      import req
+      
+      from req import request
 
       
 
@@ -41,8 +40,10 @@
       time = now.strftime("%d/%m/%Y %H:%M:%S")
 
       def submitTweet():
-        urllib3.disable_warnings()
-        req.get()
+        response = await request("https://www.google.com", method="GET")
+        print(f"GET request=> status:{response.status}, json:{await response.json()}")
+        
+        
         
 
 
