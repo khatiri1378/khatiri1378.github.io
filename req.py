@@ -1,11 +1,7 @@
-import ssl
-import requests
-import urllib3
+import urllib.request
 
 def get():
-
-    x = requests.get("https://www.google.com", verify=False)
-    urllib3.disable_warnings()
-    display(x.status_code)
-
-
+    url = "https://www.google.com"
+    response = urllib.request.urlopen(url)
+    print(response.code)
+get()
