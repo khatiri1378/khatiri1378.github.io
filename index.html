@@ -44,11 +44,11 @@
       
 
       async def submitTweet():
-        
+
         response = await pyfetch(url="https://www.google.com", method="GET")
         output = f"GET request=> status:{response.status}, json:{await response.json()}"
 
-        display(output)
+        pyscript.write('request_output', output)
         
         
         from datetime import datetime
