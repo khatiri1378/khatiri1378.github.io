@@ -35,6 +35,7 @@
 
 
       response = await pyfetch(url="https://www.google.com", method="GET")
+      asyncio.ensure_future()
       output = f"GET request=> status:{response.status}, json:{await response.json()}"
 
       display(output)
