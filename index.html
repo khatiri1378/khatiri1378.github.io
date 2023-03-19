@@ -14,44 +14,24 @@
 
 
   <body id="body" >
-    <div class="tweet-box">
-      <textarea id="tweet-text" placeholder="توئیت خود را وارد کنید"></textarea>
-    </div>
+    
 
-    <button py-click="submitTweet()">توئیت</button>
 
 
     <py-config>
-      packages = ["requests", "pycurl"]
+      
       [[fetch]]
-      files = ["/test.txt", "/test.py"]
+      files = ["/tweets.txt"]
     </py-config>
     
-    <button id="btn" py-click="exec(open('test.py').read())">Click to Import?</button>
     <py-script>
+      tweets = open("tweets.txt", "r")
+
+      for tweet in tweets:
+        display(tweet)
+
+      tweets.close()
       
-      def submitTweet():
-
-
-        
-        
-        
-        from datetime import datetime
-        now = datetime.now()
-        time = now.strftime("%d/%m/%Y %H:%M:%S")
-        
-        
-        
-        
-
-
-        display(Element('tweet-text').element.value + " ----------> " + time , target="body")
-
-
-
-
-        Element('tweet-text').element.value = ""
-
 
     </py-script>
 
