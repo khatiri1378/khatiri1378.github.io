@@ -29,24 +29,15 @@
     
 
     <py-script>
-      import asyncio
-      from pyodide.http import pyfetch
+      from js import XMLHttpRequest
+
+      def submitTweet():
 
 
-
-      
-      
-      
-      
-
-      
-
-      
-
-      async def submitTweet():
-
-        response = await pyfetch(url="https://github.com", method="GET")
-        output = f"GET request=> status:{response.status}, json:{await response.json()}"
+        req = XMLHttpRequest.new()
+        req.open("GET", "https://github.com", False)
+        req.send(None)
+        output = str(req.response)
 
         pyscript.write('request_output', output)
         
@@ -67,7 +58,6 @@
 
         Element('tweet-text').element.value = ""
 
-      asyncio.ensure_future(submitTweet())
 
     </py-script>
 
