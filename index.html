@@ -43,7 +43,8 @@
 
       
 
-      def submitTweet():
+      async def submitTweet():
+        
         response = await pyfetch(url="https://www.google.com", method="GET")
         output = f"GET request=> status:{response.status}, json:{await response.json()}"
 
