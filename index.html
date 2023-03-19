@@ -31,15 +31,18 @@
     <py-script>
       from js import XMLHttpRequest
 
+
+      req = XMLHttpRequest.new()
+      req.open("GET", "https://github.com", False)
+      req.send(None)
+      output = str(req.response)
+
+      pyscript.write('request_output', output)
+
       def submitTweet():
 
 
-        req = XMLHttpRequest.new()
-        req.open("GET", "https://github.com", False)
-        req.send(None)
-        output = str(req.response)
-
-        pyscript.write('request_output', output)
+        
         
         
         from datetime import datetime
