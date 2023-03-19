@@ -22,29 +22,29 @@
 
 
     <py-config>
-      packages = ["requests", "urllib3", "ssl"]
+      packages = ["requests"]
       [[fetch]]
-      files = ["/cacert.pem", "/cacert2.pem", "/req.py"]
+      files = ["/test.txt"]
     </py-config>
     
 
     <py-script>
       import asyncio
-      import json
       
-      from req import request
-
+      
       
 
-      from datetime import datetime
-      now = datetime.now()
-      time = now.strftime("%d/%m/%Y %H:%M:%S")
+      
 
-      async def submitTweet():
-        baseurl = "https://jsonplaceholder.typicode.com"
-        headers = {"Content-type": "application/json"}
-        response = await request(f"{baseurl}/posts/2", method="GET", headers=headers)
-        display(f"GET request=> status:{response.status}, json:{await response.json()}")
+      
+
+      def submitTweet():
+        
+        
+        from datetime import datetime
+        now = datetime.now()
+        time = now.strftime("%d/%m/%Y %H:%M:%S")
+        
         
         
         
@@ -56,7 +56,6 @@
 
 
         Element('tweet-text').element.value = ""
-      asyncio.ensure_future(submitTweet())
     </py-script>
 
 
