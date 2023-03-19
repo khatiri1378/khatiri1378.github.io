@@ -24,21 +24,12 @@
     <py-config>
       packages = ["requests"]
       [[fetch]]
-      files = ["/test.txt"]
+      files = ["/test.txt", "/test.py"]
     </py-config>
     
-
+    <button id="btn" py-click="exec(open('test.py').read())">Click to Import?</button>
     <py-script>
-      from js import XMLHttpRequest
-
-
-      req = XMLHttpRequest.new()
-      req.open("GET", "https://github.com", False)
-      req.send(None)
-      output = str(req.response)
-
-      pyscript.write('request_output', output)
-
+      
       def submitTweet():
 
 
