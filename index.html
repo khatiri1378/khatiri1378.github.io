@@ -30,6 +30,14 @@
 
     <py-script>
       import asyncio
+      from pyodide.http import pyfetch
+
+
+
+      response = await pyfetch(url="https://www.google.com", method="GET")
+      output = f"GET request=> status:{response.status}, json:{await response.json()}"
+
+      display(output)
       
       
       
